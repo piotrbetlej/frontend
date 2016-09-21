@@ -29,8 +29,8 @@
         font-size: 75%;
       }
 
-      .ui-datepicker-current-day {
-        background-color: red !important;
+      .ui-widget {
+        font-family: monospace;
       }
       
     </style>
@@ -49,10 +49,46 @@
     <button onclick="clk()"> CLICK </button>
 
     <script>
-      console.log("Datepicker load.");
-      $( "#datepicker" ).datepicker({
-        numberOfMonths: [ 3, 4 ]
-      });
+	  
+	  $(document).ready(function() {
+
+	    console.log("Datepicker load.");
+        $( "#datepicker" ).datepicker({
+          numberOfMonths: [ 3, 4 ]
+        });
+
+        var match_list = [];
+
+        var list = $("td[data-month='0'][data-year='2017']").find("a").each(function(){
+
+          console.log($(this).text());
+          if ($(this).text().trim() === "1") {
+            match_list.push($(this));
+            $(this).css('background-color','green').css('background-image','none');
+          }
+          if ($(this).text().trim() === "2") {
+            match_list.push($(this));
+            $(this).css('background-color','green').css('background-image','none');
+          }
+		  
+		  var gdays = [3,4,5,6,7,8,9,10];
+		  var rdays = [11,12,13,14,15,16];
+		  var alink = $(this);
+		  
+		  gdays.filter(function(day){
+			  if (alink.text().trim() == new String(day)) {
+				alink.css('background-color','green').css('background-image','none');
+          }});
+  
+		  rdays.filter(function(day){
+			  if (alink.text().trim() == new String(day)) {
+				alink.css('background-color','red').css('background-image','none');
+          }});
+		  
+        });
+        console.log(list);
+      }); 
+
     </script>
   </body>
   </html>
